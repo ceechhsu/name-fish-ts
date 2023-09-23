@@ -1,11 +1,22 @@
 import { Component } from "react";
-import "./styles/score-board.css";
 
-const incorrectCount = 0;
-const correctCount = 0;
-const answersLeft = ["trout", "salmon", "tuna", "shark"];
-export class ClassScoreBoard extends Component {
+// Define the props interface for ClassScoreBoard.
+interface ScoreBoardProps {
+  correctCount: number;
+  incorrectCount: number;
+}
+
+export class ClassScoreBoard extends Component<ScoreBoardProps> {
   render() {
+    // Destructure from props.
+    const { correctCount, incorrectCount } = this.props;
+
+    // Initialize an array of answer choices
+    let answersLeft: string[] = ["trout", "salmon", "tuna", "shark"];
+    // Remove answer choices from the front of the array based on counts
+    answersLeft = answersLeft.slice(correctCount + incorrectCount);
+
+    // Rendering the UI
     return (
       <div id="score-board">
         <div>Incorrect 🔻: {incorrectCount}</div>
